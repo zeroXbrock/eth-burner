@@ -22,7 +22,7 @@ const burn = async (burnWallet: Wallet) => {
                 gasLimit: 21000,
                 gasPrice,
             });
-            console.log(` Sent tx with nonce ${tx.nonce} burning ${formatEther(balance)} ETH at gas price ${gasPriceToGwei(gasPrice)} gwei: ${tx.hash}`);
+            console.log(` Sent tx with nonce ${tx.nonce} burning ${formatEther(balance)} ETH at gas price ${gasPriceToGwei(gasPrice)}`);
         } catch (err: any) {
             console.log(` Error sending tx: ${err.message ?? err}`);
         }
