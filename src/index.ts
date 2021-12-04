@@ -1,16 +1,23 @@
-require("dotenv").config();
-import { ethers, providers, BigNumber, Wallet } from "ethers";
 import "log-timestamp";
+import { providers, Wallet } from "ethers";
 
-if (!process.env.ETH_RPC_URL) {
-    console.log("Please define ETH_RPC_URL in .env");
-    process.exit(2);
-}
+import burn from "./burn";
 
-const ETH_RPC_URL = process.env.ETH_RPC_URL || "";
+// get args from cmd line
+// ...
+const ETH_RPC_URL = "http://localhost:8545";
+const VICTIM_KEY = "0x0000000000000000000000000000000000000000";
 
 async function main() {
-    console.log(`Connected to ${ETH_RPC_URL}`)
+    console.log(`Connected to ${ETH_RPC_URL}`);
+    const provider = new providers.JsonRpcProvider(ETH_RPC_URL);
+    const burnWallet = new Wallet(VICTIM_KEY, provider);
+    await provider.ready;
+
+    provider.on("block", async blockNumber => {
+        console.log(`[BLOCK ${blockNumber}]`);
+        await burn(burnWallet);
+    });
 }
 
 main()
