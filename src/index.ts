@@ -1,16 +1,17 @@
 import "log-timestamp";
 import { providers, Wallet } from "ethers";
 
+import args from "./args";
 import burn from "./burn";
 
 // get args from cmd line
 // ...
-const ETH_RPC_URL = "http://localhost:8545";
-const VICTIM_KEY = "0x0000000000000000000000000000000000000000";
+const RPC_URL = args.rpcUrl;
+const VICTIM_KEY = args.privateKey;
 
 async function main() {
-    console.log(`Connected to ${ETH_RPC_URL}`);
-    const provider = new providers.JsonRpcProvider(ETH_RPC_URL);
+    console.log(`Connected to ${RPC_URL}`);
+    const provider = new providers.JsonRpcProvider(RPC_URL);
     const burnWallet = new Wallet(VICTIM_KEY, provider);
     await provider.ready;
 
@@ -20,12 +21,6 @@ async function main() {
     });
 }
 
-main()
-.then(_ => {
-    process.exit(0);
-}).catch(e => {
-    console.error(e);
-    process.exit(1);
-});
+main();
 
 export default {};
