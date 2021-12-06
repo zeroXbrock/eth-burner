@@ -4,7 +4,6 @@ const { formatEther } = utils;
 
 const burn = async (burnWallet: Wallet) => {
     const balance = await burnWallet.getBalance();
-    const nonce = await burnWallet.provider.getTransactionCount(burnWallet.address);
     if (balance.isZero()) {
         console.log(`Balance is zero`);
         return;
@@ -18,6 +17,7 @@ const burn = async (burnWallet: Wallet) => {
 
     try {
         console.log(`Burning ${formatEther(balance)}`);
+        const nonce = await burnWallet.provider.getTransactionCount(burnWallet.address);
         const tx = await burnWallet.sendTransaction({
             to: burnWallet.address,
             gasLimit: 21000,
