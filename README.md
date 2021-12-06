@@ -1,6 +1,6 @@
 # eth-burner
 
-Watches each block for a balance update, and if one is detected, burns all that ETH by sending the ETH in the account to itself and paying the highest possible transaction fee, effectively burning it from the account.
+Watches each block for a balance update, and if one is detected, burns all that ETH by transferring ETH with the highest possible transaction fee, effectively burning it from the account.
 
 Technically, the ETH is not actually burned (permanently erased). It's just collected by miners :)
 
