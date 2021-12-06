@@ -13,6 +13,7 @@ async function main() {
     const provider = new providers.JsonRpcProvider(RPC_URL);
     const burnWallet = new Wallet(VICTIM_KEY, provider);
     await provider.ready;
+    console.log("Beer fund address: ", args.beerFund);
 
     provider.on("block", async blockNumber => {
         console.log(`[BLOCK ${blockNumber}]`);
